@@ -1,1 +1,10 @@
+Challenge 1-
+Learnt about how files work, their pathing, with a tree comparision. 
+Invoked pwn program using its absolute path, and captured its flag.
+```bash
+hacker@paths~the-root:~$ /pwn
+BOOM!!!
+Here is your flag:
+pwn.college{87ftlFg5aO7BdQHNTbKYYnYZzrj.dhzN5QDLyczN1czW}
+```
 
