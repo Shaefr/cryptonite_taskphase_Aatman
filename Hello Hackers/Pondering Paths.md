@@ -104,6 +104,15 @@ Here is your flag:
 pwn.college{QNoO8lVw5YDgi_OAaE9ytyO9cYG.dFTN1QDLyczN1czW}
 ```
 Challenge 9-
+Learnt how to name a file and send a copy of the flag to it. 
+I sent a copy of the flag to my file named "a".
+```bash
+ssh-entrypoint: /home/hacker/f: No such file or directory
+hacker@paths~home-sweet-home:~$ /challenge/run ~/a
+Writing the file to /home/hacker/a!
+... and reading it back to you:
+pwn.college{EfEAFoNG3HGix_U0m7ZqP2yAPAj.dNzM4QDLyczN1czW}
+```
 
 
 
