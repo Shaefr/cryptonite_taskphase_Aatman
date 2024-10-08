@@ -79,4 +79,29 @@ Here is your flag:
 pwn.college{Y3acL23MCrDkTcVZDQJdCq4HsUG.dlDN1QDLyczN1czW}
 ```
 Challenge 7-
+Learnt to use explicit directory, after initially misunderstanding the question.
+```bash
+hacker@paths~explicit-relative-paths-from-:~$ cd /
+hacker@paths~explicit-relative-paths-from-:/$ ./
+ssh-entrypoint: ./: Is a directory
+hacker@paths~explicit-relative-paths-from-:/$ cd ./
+hacker@paths~explicit-relative-paths-from-:/$ ./challenge/run
+Correct!!!
+./challenge/run is a relative path, invoked from the right directory!
+Here is your flag:
+pwn.college{QpdTmCRjZ1umzKneV2sLUhbT-wT.dBTN1QDLyczN1czW}
+```
+Challenge 8-
+Learnt the use of explicit pathing where we tell linux what we want, so it does not accidentally execute a code under the same name.
+```bash
+hacker@paths~implicit-relative-path:~$ cd /challenge
+hacker@paths~implicit-relative-path:/challenge$ .run
+ssh-entrypoint: .run: command not found
+hacker@paths~implicit-relative-path:/challenge$ ./run
+Correct!!!
+./run is a relative path, invoked from the right directory!
+Here is your flag:
+pwn.college{QNoO8lVw5YDgi_OAaE9ytyO9cYG.dFTN1QDLyczN1czW}
+```
+
 
