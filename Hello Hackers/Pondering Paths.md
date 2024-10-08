@@ -20,5 +20,63 @@ Correct!!!
 pwn.college{Al4UKb2sT_YJhy0-1ecOEQHVKDT.dVDN1QDLyczN1czW}
 ```
 Challenge 3-
-
+Learnt how to use the change directory command. "cd".
+Wasted a lot of time trying to find the right way, eventually noticed there is a space after cd.
+Minor source- https://www.geeksforgeeks.org/cd-command-in-linux-with-examples/
+```bash
+hacker@paths~position-thy-self:~$ /challenge/run
+Incorrect...
+You are not currently in the /proc/67/fd directory.
+Please use the `cd` utility to change directory appropriately.
+hacker@paths~position-thy-self:~$ cd /proc/67/fd
+hacker@paths~position-thy-self:/proc/67/fd$ /challenge/run
+Correct!!!
+/challenge/run is an absolute path, invoked from the right directory!
+Here is your flag:
+pwn.college{kWtJ3VyrVNquE6B01e7oDFW0ie9.dZDN1QDLyczN1czW}
+hacker@paths~position-thy-self:/proc/67/fd$
+```
+Challenge 4-
+Method of approach same as challenge 3.
+```bash
+hacker@paths~position-elsewhere:~$ /challenge/run
+Incorrect...
+You are not currently in the / directory.
+Please use the `cd` utility to change directory appropriately.
+hacker@paths~position-elsewhere:~$ cd //
+hacker@paths~position-elsewhere://$ /challenge/run
+Incorrect...
+You are not currently in the / directory.
+Please use the `cd` utility to change directory appropriately.
+hacker@paths~position-elsewhere://$ cd /
+hacker@paths~position-elsewhere:/$ /challenge/run
+Correct!!!
+/challenge/run is an absolute path, invoked from the right directory!
+Here is your flag:
+pwn.college{M1fTofpdbnE21YFfJ31YA5R4e-t.ddDN1QDLyczN1czW}
+```
+Challenge 5-
+Approach same as challenge 3
+```bash
+hacker@paths~position-yet-elsewhere:~$ /challenge/run
+Incorrect...
+You are not currently in the /usr/include directory.
+Please use the `cd` utility to change directory appropriately.
+hacker@paths~position-yet-elsewhere:~$ cd /usr/include
+hacker@paths~position-yet-elsewhere:/usr/include$ /challenge/run
+Correct!!!
+/challenge/run is an absolute path, invoked from the right directory!
+Here is your flag:
+pwn.college{QVmLET9pW2o7noc9ZTl_y_kQfMH.dhDN1QDLyczN1czW}
+```
+Challenge 6-
+Used help from https://www.educba.com/linux-relative-path/ to figure out syntax.
+```bash
+hacker@paths~implicit-relative-paths-from-:/$ challenge/run
+Correct!!!
+challenge/run is a relative path, invoked from the right directory!
+Here is your flag:
+pwn.college{Y3acL23MCrDkTcVZDQJdCq4HsUG.dlDN1QDLyczN1czW}
+```
+Challenge 7-
 
