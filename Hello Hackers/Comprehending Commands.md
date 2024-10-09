@@ -254,4 +254,9 @@ find: ‘/proc/7/ns’: Permission denied
 hacker@commands~finding-files:~$ cat /usr/share/javascript/mathjax/unpacked/jax/output/SVG/fonts/TeX/AMS/flag
 ```
 Challenge 12-
-
+```bash
+hacker@commands~linking-files:~$ ln -sf /flag /home/hacker/not-the-flag
+hacker@commands~linking-files:~$ /challenge/catflag
+About to read out the /home/hacker/not-the-flag file!
+pwn.college{Uqfn7W-DDXiCQgwlKrbxYoWpoD4.dlTM1UDLyczN1czW}
+```
