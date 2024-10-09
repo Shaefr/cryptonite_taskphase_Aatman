@@ -74,3 +74,122 @@ hacker@commands~removing-files:~$ /challenge/check
 Excellent removal. Here is your reward:
 pwn.college{sHRhUTIm6RIfS2-THgbBFczRr5I.dZTOwUDLyczN1czW}
 ```
+Challenge 8-
+Found the hidden flag file by listing out hidden files too using ls -a.
+Then I used cat command to display it.
+```bash
+hacker@commands~hidden-files:~$ cd /
+hacker@commands~hidden-files:/$ ls -a
+.   .dockerenv            bin   challenge  etc   lib    lib64   media  nix  proc  run   srv  tmp  var
+..  .flag-26067198225605  boot  dev        home  lib32  libx32  mnt    opt  root  sbin  sys  usr
+hacker@commands~hidden-files:/$ cd /tmp
+hacker@commands~hidden-files:/tmp$ /challenge/run
+There's no flag here for you! I made the flag readable but hid it as a .-prepended file in the / directory. Go find it!
+hacker@commands~hidden-files:/$ cat /.flag-26067198225605
+pwn.college{0q00QEMDGfqSYFs6TwlSkrFYyfa.dBTN4QDLyczN1czW}
+hacker@commands~hidden-files:/$
+```
+Challenge 9- 
+THE MOST FUN I've had here so far, after trial and error of reading and searching through files using cat, ls, ls -a, cd, and parsing through the files for the clues, i found the flag.
+
+```bash
+hacker@commands~an-epic-filesystem-quest:~$ cd /
+hacker@commands~an-epic-filesystem-quest:/$ ls
+TIP  boot       dev  flag  lib    lib64   media  nix  proc  run   srv  tmp  var
+bin  challenge  etc  home  lib32  libx32  mnt    opt  root  sbin  sys  usr
+hacker@commands~an-epic-filesystem-quest:/$ ls -a
+.   .dockerenv  bin   challenge  etc   home  lib32  libx32  mnt  opt   root  sbin  sys  usr
+..  TIP         boot  dev        flag  lib   lib64  media   nix  proc  run   srv   tmp  var
+hacker@commands~an-epic-filesystem-quest:/$ cat /flag
+cat: /flag: Permission denied
+hacker@commands~an-epic-filesystem-quest:/$ cat /TIP
+Great sleuthing!
+The next clue is in: /opt/pwndbg/.venv/lib/python3.8/site-packages/pwnlib/encoders/arm
+hacker@commands~an-epic-filesystem-quest:/$ cat //opt/pwndbg/.venv/lib/python3.8/site-packages/pwnlib/encoders/arm
+cat: //opt/pwndbg/.venv/lib/python3.8/site-packages/pwnlib/encoders/arm: Is a directory
+hacker@commands~an-epic-filesystem-quest:/$ cat /opt/pwndbg/.venv/lib/python3.8/site-packages/pwnlib/encoders/arm
+cat: /opt/pwndbg/.venv/lib/python3.8/site-packages/pwnlib/encoders/arm: Is a directory
+hacker@commands~an-epic-filesystem-quest:/$ cat /opt
+cat: /opt: Is a directory
+hacker@commands~an-epic-filesystem-quest:/$ ls /opt/pwndbg/.venv/lib/python3.8/site-packages/pwnlib/encoders/arm
+INSIGHT  __init__.py  __pycache__  alphanumeric  xor.py
+hacker@commands~an-epic-filesystem-quest:/$ ls /INSIGHT
+ls: cannot access '/INSIGHT': No such file or directory
+hacker@commands~an-epic-filesystem-quest:/$ cat /INSIGHT
+cat: /INSIGHT: No such file or directory
+hacker@commands~an-epic-filesystem-quest:/$ cat /opt/INSIGHT
+cat: /opt/INSIGHT: No such file or directory
+hacker@commands~an-epic-filesystem-quest:/$ cat /opt/pwndbg/.venv/lib/python3.8/site-packages/pwnlib/encoders/arm/INSIGHT
+Congratulations, you found the clue!
+The next clue is in: /usr/lib/python3/dist-packages/matplotlib/sphinxext/__pycache__
+
+The next clue is **delayed** --- it will not become readable until you enter the directory with 'cd'.
+hacker@commands~an-epic-filesystem-quest:/$ cd /usr/lib/python3/dist-packages/matplotlib/sphinxext/__pycache__
+hacker@commands~an-epic-filesystem-quest:/usr/lib/python3/dist-packages/matplotlib/sphinxext/__pycache__$ ls
+CUE  __init__.cpython-38.pyc  mathmpl.cpython-38.pyc  plot_directive.cpython-38.pyc
+hacker@commands~an-epic-filesystem-quest:/usr/lib/python3/dist-packages/matplotlib/sphinxext/__pycache__$ cat CUE
+Congratulations, you found the clue!
+The next clue is in: /usr/lib/ruby/2.7.0/reline
+
+Watch out! The next clue is **trapped**. You'll need to read it out without 'cd'ing into the directory; otherwise, the clue will self destruct!
+hacker@commands~an-epic-filesystem-quest:/usr/lib/python3/dist-packages/matplotlib/sphinxext/__pycache__$ ls /usr/lib/ruby/2.7.0/reline
+MESSAGE-TRAPPED  config.rb      history.rb  key_actor.rb   kill_ring.rb    unicode     version.rb
+ansi.rb          general_io.rb  key_actor   key_stroke.rb  line_editor.rb  unicode.rb  windows.rb
+hacker@commands~an-epic-filesystem-quest:/usr/lib/python3/dist-packages/matplotlib/sphinxext/__pycache__$ cat /usr/lib/ruby/2.7.0/reline/MESSAGE-TRAPPED
+Great sleuthing!
+The next clue is in: /opt/pwndbg/.venv/lib/python3.8/site-packages/rpyc/cli/__pycache__
+
+The next clue is **hidden** --- its filename starts with a '.' character. You'll need to look for it using special options to 'ls'.
+hacker@commands~an-epic-filesystem-quest:/usr/lib/python3/dist-packages/matplotlib/sphinxext/__pycache__$ ls /opt/pwndbg/.venv/lib/python3.8/site-packages/rpyc/cli/__pycache__
+__init__.cpython-38.pyc  rpyc_classic.cpython-38.pyc  rpyc_registry.cpython-38.pyc
+hacker@commands~an-epic-filesystem-quest:/usr/lib/python3/dist-packages/matplotlib/sphinxext/__pycache__$ ls opt/pwndbg/.venv/lib/pyt
+hon3.8/site-packages/rpyc/cli/__pycache__
+ls: cannot access 'opt/pwndbg/.venv/lib/python3.8/site-packages/rpyc/cli/__pycache__': No such file or directory
+hacker@commands~an-epic-filesystem-quest:/usr/lib/python3/dist-packages/matplotlib/sphinxext/__pycache__$ ls -a
+.  ..  CUE  __init__.cpython-38.pyc  mathmpl.cpython-38.pyc  plot_directive.cpython-38.pyc
+hacker@commands~an-epic-filesystem-quest:/usr/lib/python3/dist-packages/matplotlib/sphinxext/__pycache__$ cd /opt/pwndbg/.venv/lib/python3.8/site-packages/rpyc/cli/__pycache__
+hacker@commands~an-epic-filesystem-quest:/opt/pwndbg/.venv/lib/python3.8/site-packages/rpyc/cli/__pycache__$ ls -a
+.  ..  .HINT  __init__.cpython-38.pyc  rpyc_classic.cpython-38.pyc  rpyc_registry.cpython-38.pyc
+hacker@commands~an-epic-filesystem-quest:/opt/pwndbg/.venv/lib/python3.8/site-packages/rpyc/cli/__pycache__$ cat .HINT
+Lucky listing!
+The next clue is in: /opt/radare2/libr
+hacker@commands~an-epic-filesystem-quest:/opt/pwndbg/.venv/lib/python3.8/site-packages/rpyc/cli/__pycache__$ cd /opt/radare2/libr
+hacker@commands~an-epic-filesystem-quest:/opt/radare2/libr$ ls
+Makefile    bin            config.h.in     cons      depgraph.pl  fs         libr.pc.acr             meson.build  stripsyms.sh
+REVELATION  bp             config.h.tail   core      do-ar-sh     include    libs.custom.mk.example  reg          symgraph.pl
+anal        config         config.mk       count.sh  egg          io         libs.mk                 rules.mk     syscall
+arch        config.h       config.mk.head  crypto    esil         lang       magic                   search       util
+asm         config.h.head  config.mk.tail  debug     flag         ld.script  main                    socket
+hacker@commands~an-epic-filesystem-quest:/opt/radare2/libr$ cat REVELATION
+Congratulations, you found the clue!
+The next clue is in: /usr/lib/x86_64-linux-gnu/perl-base/unicore/lib/PCM
+
+The next clue is **hidden** --- its filename starts with a '.' character. You'll need to look for it using special options to 'ls'.
+hacker@commands~an-epic-filesystem-quest:/opt/radare2/libr$ cd  /usr/lib/x86_64-linux-gnu/perl-base/unicore/lib/PCM
+hacker@commands~an-epic-filesystem-quest:/usr/lib/x86_64-linux-gnu/perl-base/unicore/lib/PCM$ ls -a
+.  ..  .README  Y.pl
+hacker@commands~an-epic-filesystem-quest:/usr/lib/x86_64-linux-gnu/perl-base/unicore/lib/PCM$ cat .README
+Congratulations, you found the clue!
+The next clue is in: /opt/aflplusplus/qemu_mode/qemuafl/scripts/tracetool
+
+The next clue is **delayed** --- it will not become readable until you enter the directory with 'cd'.
+hacker@commands~an-epic-filesystem-quest:/usr/lib/x86_64-linux-gnu/perl-base/unicore/lib/PCM$ cd /opt/aflplusplus/qemu_mode/qemuafl/scripts/tracetool
+hacker@commands~an-epic-filesystem-quest:/opt/aflplusplus/qemu_mode/qemuafl/scripts/tracetool$ ls
+BLUEPRINT  __init__.py  backend  format  transform.py  vcpu.py
+hacker@commands~an-epic-filesystem-quest:/opt/aflplusplus/qemu_mode/qemuafl/scripts/tracetool$ cat BLUEPRINT
+Great sleuthing!
+The next clue is in: /usr/share/javascript/mathjax/unpacked/jax/output/HTML-CSS/fonts/Latin-Modern/Size7
+
+Watch out! The next clue is **trapped**. You'll need to read it out without 'cd'ing into the directory; otherwise, the clue will self destruct!
+hacker@commands~an-epic-filesystem-quest:/opt/aflplusplus/qemu_mode/qemuafl/scripts/tracetool$ cd  /usr/share/javascript/mathjax/unpacked/jax/output/HTML-CSS/fonts/Latin-Modern/Size7
+ssh-entrypoint: CLUE-TRAPPED: Permission denied
+hacker@commands~an-epic-filesystem-quest:/usr/share/javascript/mathjax/unpacked/jax/output/HTML-CSS/fonts/Latin-Modern/Size7$ ls
+ssh-entrypoint: CLUE-TRAPPED: Permission denied
+CLUE-TRAPPED  Regular
+ssh-entrypoint: CLUE-TRAPPED: Permission denied
+hacker@commands~an-epic-filesystem-quest:/usr/share/javascript/mathjax/unpacked/jax/output/HTML-CSS/fonts/Latin-Modern/Size7$ cat CLUE-TRAPPED
+ssh-entrypoint: CLUE-TRAPPED: Permission denied
+CONGRATULATIONS! Your perserverence has paid off, and you have found the flag!
+It is: pwn.college{8bdYlXTg29CqpwdVzl1TphRAOIb.dljM4QDLyczN1czW}
+```
+
