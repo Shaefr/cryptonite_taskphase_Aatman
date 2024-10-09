@@ -192,4 +192,19 @@ ssh-entrypoint: CLUE-TRAPPED: Permission denied
 CONGRATULATIONS! Your perserverence has paid off, and you have found the flag!
 It is: pwn.college{8bdYlXTg29CqpwdVzl1TphRAOIb.dljM4QDLyczN1czW}
 ```
-
+Challenge 10-
+learnt how to create a directory and then created a file in it then ran /challenge/run. 
+Obtained the flag. I had initially checked for pwn inside of temp.
+```bash
+hacker@commands~making-directories:~$ cd /tmp
+hacker@commands~making-directories:/tmp$ ls
+bin  hsperfdata_root  tmp.MiOQGWw5Zc
+hacker@commands~making-directories:/tmp$ mkdir pwn
+hacker@commands~making-directories:/tmp$ ls
+bin  hsperfdata_root  pwn  tmp.MiOQGWw5Zc
+hacker@commands~making-directories:/tmp$ cd /tmp/pwn
+hacker@commands~making-directories:/tmp/pwn$ touch college
+hacker@commands~making-directories:/tmp/pwn$ /challenge/run
+Success! Here is your flag:
+pwn.college{g3FwaO9O36_8wyAoSVEiAvysYM4.dFzM4QDLyczN1czW}
+```
