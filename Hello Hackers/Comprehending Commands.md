@@ -253,3 +253,5 @@ find: ‘/proc/7/ns’: Permission denied
 /nix/store/pmvk2bk4p550w182rjfm529kfqddnvh3-python3.11-pwntools-4.12.0/lib/python3.11/site-packages/pwnlib/flag
 hacker@commands~finding-files:~$ cat /usr/share/javascript/mathjax/unpacked/jax/output/SVG/fonts/TeX/AMS/flag
 ```
+Challenge 12-
+
