@@ -76,7 +76,7 @@ _=/run/workspace/bin/env
 ```
 # Challenge 6-
 We can store the output of some command in a variable. This is done using the syntax Var_NAME=$(YOUR_COMMAND).
-In older versions, ` (backsticks) were used instead of brackets. The problem was, we couldnt nest command substitutions here, as each bakcstick would work like opening and closing brackets and there was no notability of them, unlike ( being opening and ) being closing.
+In older versions, ` (backsticks) were used instead of brackets. The problem was, we couldnt nest command substitutions here, as each bakcstick would work like opening and closing brackets and there was no notability of them, unlike "(" being opening and ")" being closing.
 For this challenge, i storued the output of /challenge/run in PWN, then printed out the content of PWN.
 ```bash
 hacker@variables~storing-command-output:~$ PWN=$(/challenge/run)
@@ -85,6 +85,24 @@ and submit it!
 hacker@variables~storing-command-output:~$ echo $PWN
 pwn.college{8bi3Dn14tMYbxF5XN9_QL4SykqD.dVzN0UDLyczN1czW}
 ```
-#Challenge 7-
+# Challenge 7-
+"read" builtin allows the shell to accept an input from the user itself. 
+Note- the "-p" argument allows us to pass a prompt of our choice too, which can be used to help the user understand the program's request/gesture.
+Here, simply as the challenge asked me to, i allowed the shell to read my input of COLLEGE.
+```bash
+COLLEGE
+You've set the PWN variable properly! As promised, here is the flag:
+pwn.college{YylDH9SLtNixorWy0TOLW3gsLV5.dhzN1QDLyczN1czW}
+```
+# Challenge 8-
+Here we learn that an inefficient way of reading a file into an environment variable is by using the cat program.
+This can be avoided and efficiency can be increased if we simply apply our 2 previously learnt concepts- use of read builtin and the skill of file redirection.
+For this question, i allowed read to read into the content of /challenge/read_me whilst i presented its data into the standard input of read itself. It was stored in PWN. This was enough for the challenge.
+```bash
+hacker@variables~reading-files:~$ read PWN < /challenge/read_me
+You've set the PWN variable properly! As promised, here is the flag:
+pwn.college{8WupOWah72KAt5No7_eoCyXEpP5.dBjM4QDLyczN1czW}
+```
+
 
 
