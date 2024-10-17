@@ -108,4 +108,86 @@ Goodbye!
 ```
 # Challenge 6 | Bakcgrounding Processes
 There exists a bg command builtin, which allows the process to work in the backgroud and returns us the shell to invoke more commands.
+It doesnt allow a process to keep staying suspended, and allows it to run behind the scenes.
+T- means suspended.
+R+ means actively running in the foreground.
+Ss means sleeping until used.
+For this challenge, i ran the run program, suspended it, then ran it in the bg and invoked another one to get the flag.
+```bash
+hacker@processes~backgrounding-processes:~$ /challenge/run
+I'll only give you the flag if there's already another copy of me running *and
+not suspended* in this terminal... Let's check!
 
+UID          PID STAT CMD
+root          84 S+   bash /challenge/run
+root          86 R+   ps -o user=UID,pid,stat,cmd
+
+I don't see a second me!
+
+To pass this level, you need to suspend me, resume the suspended process in the
+background, and then launch a new version of me! You can background me with
+Ctrl-Z (and resume me in the background with 'bg') or, if you're not ready to
+do that for whatever reason, just hit Enter and I'll exit!
+^Z
+[1]+  Stopped                 /challenge/run
+hacker@processes~backgrounding-processes:~$ bg
+[1]+ /challenge/run &
+Yay, I'm now running the background! Because of that, this text will probably
+overlap weirdly with the shell prompt. Don't panic; just hit Enter a few times
+to scroll this text out.
+
+hacker@processes~backgrounding-processes:~$ /challenge/run
+I'll only give you the flag if there's already another copy of me running *and
+not suspended* in this terminal... Let's check!
+UID          PID STAT CMD
+root          84 S    bash /challenge/run
+root          94 S    sleep 6h
+root          95 S+   bash /challenge/run
+root          97 R+   ps -o user=UID,pid,stat,cmd
+Yay, I found another version of me running in the background! Here is the flag:
+pwn.college{AwQrd_11gKtnEzlApzDoEQrtQmK.ddDN4QDLyczN1czW}
+```
+# Challenge 7 | Foregrounding Background Processes
+We can foreground a background running process using fg.
+Here, i ran /challenge/run, suspended it, ran it in the bg, then brought it to fg.
+```bash
+hacker@processes~foregrounding-processes:~$ fg
+ssh-entrypoint: fg: current: no such job
+hacker@processes~foregrounding-processes:~$ bg
+ssh-entrypoint: bg: current: no such job
+hacker@processes~foregrounding-processes:~$ /challenge/run
+To pass this level, you need to suspend me, resume the suspended process in the
+background, and *then* foreground it without re-suspending it! You can
+background me with Ctrl-Z (and resume me in the background with 'bg') or, if
+you're not ready to do that for whatever reason, just hit Enter and I'll exit!
+^Z
+[1]+  Stopped                 /challenge/run
+hacker@processes~foregrounding-processes:~$ bg
+[1]+ /challenge/run &
+
+Yay, I'm now running the background! Because of that, this text will probably
+overlap weirdly with the shell prompt. Don't panic; just hit Enter a few times
+to scroll this text out. After that, resume me into the foreground with 'fg';
+I'll wait.
+hacker@processes~foregrounding-processes:~$ fg
+/challenge/run
+YES! Great job! I'm now running in the foreground. Hit Enter for your flag!
+
+pwn.college{k7JXVGLKhdP-GMsRHnW9evt8OHI.dhDN4QDLyczN1czW}
+```
+# Challenge 8 | Starting BG Processes
+As i noticed, hamesha suspending a process to then move it to the bg seemed a little inefficient.
+Thankfully our super handsome seniors from cryptonite also noticed it and taught us a shortcut.
+This is done by appending a "&" to the end of the command line.
+This challenge made me run /challenge/run backgrounded, which i did in one line itself and got the flag.
+This sent the process to the bg right of the bat instead of having to manually move it there.
+```bash
+hacker@processes~starting-backgrounded-processes:~$ /challenge/run &
+[1] 82
+Yay, you started me in the background! Because of that, this text will probably
+overlap weirdly with the shell prompt, but you're used to that by now...
+hacker@processes~starting-backgrounded-processes:~$
+Anyways! Here is your flag!
+pwn.college{4Y2DZbdrJe1xQSzReL3MoFIjcSE.dlDN4QDLyczN1czW}
+```
+# Challenge 9 | 
