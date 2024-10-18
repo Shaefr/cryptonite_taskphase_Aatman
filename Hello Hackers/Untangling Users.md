@@ -60,3 +60,7 @@ Congratulations, you have become Zardus! Here is your flag:
 pwn.college{QBa47TPF0pGdKWWerRzhmecVb1m.ddTN0UDLyczN1czW}
 ```
 challenge 4-
+```bash
+hacker@users~using-sudo:~$ sudo cat /flag
+pwn.college{kSORjTXO28uInl2pySxeZcuKi_X.dhTN0UDLyczN1czW}
+```
