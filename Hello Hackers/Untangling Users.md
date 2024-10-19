@@ -43,7 +43,7 @@ zardus@users~cracking-passwords:/home/hacker$ /challenge/run
 Congratulations, you have become Zardus! Here is your flag:
 pwn.college{QBa47TPF0pGdKWWerRzhmecVb1m.ddTN0UDLyczN1czW}
 ```
-challenge 4-
+# Challenge 4-
 As we saw above, managing root passwords can be challenging. 
 They (or their hashes) are susceptible to leaks and are not well-suited for larger environments.
 To tackle this issue, the approach has shifted over the past few decades from using su to using sudo (superuser do).
