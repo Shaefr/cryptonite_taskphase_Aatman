@@ -1,4 +1,16 @@
+# Preview
+I learnt that in Linux, files have different file modes. Using ls -l, i could check out a permissions of a file or directory.
+The first character of each line represented the file type. "d" indicates that it's a directory, and  "-" indicatess that it's a normal file.
+The following 9 symbols tell us the respective abilities a user, group, and others have to that file (in that order).
+r means readability permission, w means we can write in it, x means that person can execute it.
+
 # Challenge 1 - Changing File Ownership
+In this challenge, we learn the importance of being the root user, the one who owns the file completely.
+He can change the entire accesibility of the file, when it comes to reading, writing and executing.
+The root user can also transfer ownership to another user.
+As a root user, this can be done using the chown command.
+chown [username] [file] is the syntax.
+This challenge had us start out as a root user, then chown to hacker and access the flag.
 ```bash
 hacker@permissions~changing-file-ownership:~$ ls -l
 total 28
@@ -18,6 +30,12 @@ hacker@permissions~changing-file-ownership:~$ cat not-the-flag
 pwn.college{wRHlK0Lb0n9t4HuG0S1zuKr1zcn.dFTM2QDLyczN1czW}
 ```
 # Challenge 2 - 
+A group can have multiple users in it, and a user can be a member of multiple groups.
+If a file is owned by a user and a root group too, gaining access to be the group will give one the permission to completely utilize the file.
+This is where chgrp command comes in handy.
+Here, i changed group ownership using syntax "chgrp grpname filename".
+This allowed me access to the flag and print it.
+It was kept in ourfile.
 ```bash
 hacker@permissions~groups-and-files:~$ id
 uid=1000(hacker) gid=1000(hacker) groups=1000(hacker)
@@ -34,22 +52,12 @@ total 28
 lrwxrwxrwx 1 hacker hacker   5 Oct  9 18:30 not-the-flag -> /flag
 lrwxrwxrwx 1 hacker hacker   5 Oct  9 11:49 ourfile -> /flag
 -rw-r--r-- 1 hacker hacker 435 Oct  9 17:04 the-flag
-hacker@permissions~groups-and-files:~$ cat myflag
 
-[FLAG] Here is your flag:
-[FLAG] pwn.college{gFzbESLxYh0fu3Mxxk8CfF3UkBT.ddjN1QDLyczN1czW}
-
-hacker@permissions~groups-and-files:~$ cat not-the-flag
-cat: not-the-flag: Permission denied
-hacker@permissions~groups-and-files:~$ cat ourfile
-cat: ourfile: Permission denied
-hacker@permissions~groups-and-files:~$ chrgp hacker ourfile
-ssh-entrypoint: chrgp: command not found
-hacker@permissions~groups-and-files:~$ chgrp hacker ourfile
 hacker@permissions~groups-and-files:~$ cat ourfile
 pwn.college{8ZkSjRlMM7cx0BLWEq2lGuJjErV.dFzNyUDLyczN1czW}
 ```
-Challege 3 - 
+# Challege 3 - 
+Here, i simply had to chgrp into a different name to get access, instead of the classic hacker group name the earlier challenges had.
 ```bash
 hacker@permissions~fun-with-groups-names:~$ id
 uid=1000(hacker) gid=1000(grp30914) groups=1000(grp30914)
@@ -68,13 +76,16 @@ hacker@permissions~fun-with-groups-names:~$ chgrp grp30914 ourfile
 hacker@permissions~fun-with-groups-names:~$ cat ourfile
 pwn.college{YLuYKln0BQ-ZEFBy22ygFk7Wez1.dJzNyUDLyczN1czW}
 ```
-challege 4
+# Challege 4
+Learnings of this challenge have been mentioned in preview.
+The syntax i used was [name of domain who's permission i wanted to change]+[permission to be added] [file_name].
 ```bash
 hacker@permissions~changing-permissions:~$ chmod go+rwx /flag
 hacker@permissions~changing-permissions:~$ cat /flag
 pwn.college{8etkyiLcY6YpEiD7ET4gfeGQkzU.dNzNyUDLyczN1czW}
 ```
-challenge 5
+# Challenge 5
+same as challenge 4
 ```bash
 hacker@permissions~executable-files:~$ chmod ogu+rwx /challenge/run
 hacker@permissions~executable-files:~$ /challenge/run
@@ -82,6 +93,9 @@ Successful execution! Here is your flag:
 pwn.college{YLs7-kptSojrFcigil9K-0kVIV5.dJTM2QDLyczN1czW}
 ```
 challenge 6-
+Learnings are the same as earlier challenges.
+"a" is a short for ugo, and - sign allows us to remove permissions too.
+Here i had to consecutively execute the right permission commands 8 times in a row to get the flag.
 ```bash
 Current permissions of "/challenge/pwn": rw-r--r--
 * the user does have read permissions
@@ -299,7 +313,10 @@ hacker@permissions~permission-tweaking-practice:~$ chmod ogu+rwx /flag
 hacker@permissions~permission-tweaking-practice:~$ cat /flag
 pwn.college{ckuvpewQ_AGEXsFJqpyDTklubr1.dBTM2QDLyczN1czW}
 ```
-challenge 7
+# Challenge 7
+Learnings are the same as earlier challenges.
+This time, "=" sign allows us to simply set permissions altogether, overwriting the old ones.
+Here i had to consecutively execute the right permission commands 8 times in a row to get the flag.
 ```bash
 Connected!
 hacker@permissions~permissions-setting-practice:~$ /challenge/run
